@@ -23,6 +23,11 @@ class Book(db.Model):
     def get_book(_isbn):
         return Book.query.filter_by(isbn=_isbn).first()
 
+    def delete_book(_isbn):
+        Book.query.filter_by(isbn=_isbn).delete()
+        db.session.commit()
+    
+    
     def __repr__(self):
         book_object = {
             'name': self.name,
