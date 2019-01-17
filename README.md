@@ -2,7 +2,7 @@
 
 This template can be used or extended for any Data pulling API
 
-##Consists of :
+## Consists of :
 - Python App
 - Postman Testing collection
 - Settings
