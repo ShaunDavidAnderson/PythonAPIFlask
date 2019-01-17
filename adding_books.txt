@@ -1,0 +1,9 @@
+>>> from Bookmodel import *
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Anaconda3_64\lib\site-packages\flask_sqlalchemy\__init__.py:794: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  'SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and '
+>>> Book.add_book("This is SOA", 6.66, 666666)
+>>> Book.get_all_books()
+[{"name": "This is SOA", "price": 6.66, "isbn": 666666}]
+>>> Book.add_book("Rambo is a girl", 7.77, 7777777)
+>>> Book.get_all_books()
+[{"name": "This is SOA", "price": 6.66, "isbn": 666666}, {"name": "Rambo is a girl", "price": 7.77, "isbn": 7777777}]
