@@ -14,6 +14,11 @@ books = [
         'price': 6.99,
         'isbn': 9782371000193
     },
+    {
+        'name': 'Sons of Anarchy',
+        'price': 10.99,
+        'isbn': 6666666666666
+    },
 ]
 
 #GET /books - if anyone goes to a route, default is GET
@@ -31,14 +36,6 @@ def get_book_by_isbn(isbn):
                 'price': book["price"]
             }
     return jsonify(return_value)
-
-#POST Method
-# POST /books
-# {
-# 'name': 'F',
-# 'price': 6.99,
-# 'isbn': 0123456789
-# }
 
 def validBookObject(bookObject):
     if ("name" in bookObject and "price" in bookObject and "isbn" in bookObject):
@@ -70,22 +67,13 @@ valid_object = {
 
 empty_dictionary = {}
 
-@app.route('/books/<int:isbn>', methods=['PUT'])
-def replace_book(isbn):
-    request_data = request.get_json()
-    new_book = {
-        "name": request_data['name'],
-        "price": request_data['price'],
-        "isbn": isbn
-    }
-    i=0;
-    for book in books:
-        currentIsbn = book["isbn"]
-        if currentIsbn == isbn:
-            books[i] = new_book
-        i += 1
-    response = Response("", status=204)
-    return response
+#POST Method
+# POST /books
+# {
+# 'name': 'F',
+# 'price': 6.99,
+# 'isbn': 0123456789
+# }
 
 @app.route('/books', methods=['POST'])
 def add_book():
@@ -107,6 +95,51 @@ def add_book():
         }
         response = Response(json.dumps(invalidBookObjectErrorMsg), status=400, mimetype='application/json')
         return response
+#PUT Method to Replace : Need to know schema
+# POST /books/0123456789
+# {
+# 'name': 'FG',
+# 'price': 9.99,
+# }
+
+@app.route('/books/<int:isbn>', methods=['PUT'])
+def replace_book(isbn):
+    request_data = request.get_json()
+    new_book = {
+        "name": request_data['name'],
+        "price": request_data['price'],
+        "isbn": isbn
+    }
+    i=0;
+    for book in books:
+        currentIsbn = book["isbn"]
+        if currentIsbn == isbn:
+            books[i] = new_book
+        i += 1
+    response = Response("", status=204)
+    return response
+
+#PATCH Method to UPDATE. Dont need schema. Just heading key
+# POST /books/0123456789
+# {
+# 'name': 'Change this name',
+# }
+
+@app.route('/books/<int:isbn>', methods=['PATCH'])
+def update_book(isbn):
+    request_data = request.get_json()
+    updated_book = {}
+    if("name" in request_data):
+        updated_book["name"] = request_data['name']
+    if("price" in request_data):
+        updated_book["price"] = request_data['price']
+    for book in books:
+        if book["isbn"] == isbn:
+            book.update(updated_book)
+    response = Response("", status=204)
+    response.headers['Location'] = "/books/" + str(isbn)
+    return response
+
 
 app.run(port=5000)
 
