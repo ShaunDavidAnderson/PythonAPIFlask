@@ -16,5 +16,7 @@ Including SQL backend and Authentication
 - PATCH Method
 - Create DELETE Method
 - Create Settings file for db Connection
-- Build database
+- Create Db Model in Bookmodel.py
+- replace app = Flask(__name__) in app.py with from settings import * 
+- Build database (Use CMD line: python, from Bookmodel import db, db.create_all)
 - Configure Authentication
