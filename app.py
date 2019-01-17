@@ -70,6 +70,23 @@ valid_object = {
 
 empty_dictionary = {}
 
+@app.route('/books/<int:isbn>', methods=['PUT'])
+def replace_book(isbn):
+    request_data = request.get_json()
+    new_book = {
+        "name": request_data['name'],
+        "price": request_data['price'],
+        "isbn": isbn
+    }
+    i=0;
+    for book in books:
+        currentIsbn = book["isbn"]
+        if currentIsbn == isbn:
+            books[i] = new_book
+        i += 1
+    response = Response("", status=204)
+    return response
+
 @app.route('/books', methods=['POST'])
 def add_book():
     request_data = request.get_json()
