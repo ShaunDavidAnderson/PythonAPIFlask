@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ books = [
     },
 ]
 
-# GET /books/978039400165
+
 
 #GET /books - if anyone goes to a route, default is GET
 @app.route('/books')
@@ -32,5 +32,26 @@ def get_book_by_isbn(isbn):
                 'price': book["price"]
             }
     return jsonify(return_value)
- 
+
+#POST Method
+# POST /books
+# {
+# 'name': 'F',
+# 'price': 6.99,
+# 'isbn': 0123456789
+# }
+
+def validBookObject(bookObject):
+    if ("name" in bookObject and "price" in bookObject and "isbn" in bookObject):
+        return True
+    else:
+        return False 
+
+@app.route('/books', methods=['POST'])
+def add_book():
+        
+        
+        
 app.run(port=5000)
+
+
