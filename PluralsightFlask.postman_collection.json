@@ -191,7 +191,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"odyssey\",\n\t\"price\": 10.99\n}"
+					"raw": "{\n\t\"name\": \"Irenes book is kak\",\n\t\"price\": 10.99\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/books/7777777777",
@@ -246,6 +246,39 @@
 							"value": "",
 							"disabled": true
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Request",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/books/7777777777",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"books",
+						"7777777777"
 					]
 				}
 			},
